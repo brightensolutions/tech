@@ -12,7 +12,7 @@
       <div class="container-fluid">
          <div class="row mb-2">
             <div class="col-sm-6">
-               <h1 class="m-0">Products</h1>
+               <h1 class="m-0">Job Openings</h1>
                 <br>
                 @if (session('success'))
                 <div class="alert alert-success">
@@ -24,7 +24,7 @@
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="home">Home</a></li>
-                  <li class="breadcrumb-item active">Products</li>
+                  <li class="breadcrumb-item active">Job Openings</li>
                </ol>
             </div>
          </div><!-- /.row -->
@@ -37,7 +37,7 @@
       <div class="container-fluid">
          <div class="row">
             <div class="col-2 p-2">
-                <a href="/super-admin/add-product">
+                <a href="/super-admin/add-openings">
                     <button type="button" class="btn btn-primary">
                         + Add More
                     </button>
@@ -53,9 +53,9 @@
                         <thead>
                            <tr>
                               <th>Id</th>
-                              <th>Category</th>
-                              <th>Sub Category</th>
-                              <th>Image</th>
+                              <th>Job Title</th>
+                              <th>Job Description</th>
+                              <th>Location</th>
                               <th>Date</th>
                               <th>Action</th>
                            </tr>
@@ -67,12 +67,13 @@
                            @foreach ($data as $item)
                               <tr>
                                  <td>{{ $count }}</td>
-                                 <td>{{ $item->category->cat_name }}</td>
-                                 <td>{{ $item->subcategory->sub_cat_name }}</td>
-                                 <td><img src="{{ asset('assets/img/'.$item->image) }}" width="20%" height="20%"></td>
+                                 <td>{{ $item->job_title}}</td>
+                                 <td>{{ $item->job_description}}</td>
+                                 <td>{{ $item->location}}</td>
                                  <td>{{ $item->created_at }}</td>
-                                <td>
-                                    <a onclick="return confirm('Are you sure?')" href="/super-admin/delete-product/{{ $item->id }}"><i class="fa fa-trash" style="padding:5px;font-size:15px;cursor:pointer;"
+                                <td><a  href="/super-admin/edit-openings/{{ $item->id }}"><i class="fa fa-edit" style="padding:5px;font-size:15px;cursor:pointer;"
+                                    aria-hidden="true"></i></a>
+                                    <a onclick="return confirm('Are you sure?')" href="/super-admin/delete-openings/{{ $item->id }}"><i class="fa fa-trash" style="padding:5px;font-size:15px;cursor:pointer;"
                                     aria-hidden="true"></i></a>
                                 </td>
                               </tr>

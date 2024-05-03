@@ -2,7 +2,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="super-admin/dashboard" class="brand-link">
-          <span class="brand-text font-weight-light">Shiv Shakti Elevator Components</span>
+          <span class="brand-text font-weight-light">Tech Stack</span>
       </a>
 
       <!-- Sidebar -->
@@ -31,10 +31,10 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="/super-admin/about" class="nav-link {{ isset($about_page) ? 'active' : '' }}">
+                      <a href="/super-admin/add-openings" class="nav-link {{ isset($openings_page) ? 'active' : '' }}">
                           <i class="nav-icon fas fa-tachometer-alt"></i>
                           <p>
-                              About
+                             Job Openings
                           </p>
                       </a>
                   </li>
@@ -46,7 +46,7 @@
                    </p>
                 </a>
              </li> --}}
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                       <a href="/super-admin/gallery-images" class="nav-link {{ isset($gallery_page) ? 'active' : '' }}">
                           <i class="nav-icon fas fa-tachometer-alt"></i>
                           <p>
@@ -140,7 +140,7 @@
                               Products
                           </p>
                       </a>
-                  </li>
+                  </li> --}}
               </ul>
           </nav>
           <!-- /.sidebar-menu -->

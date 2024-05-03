@@ -1,5 +1,5 @@
 <footer class="main-footer">
-   <strong> <a href="https://shivshaktielevatorcomponents.com/">Shiv Shakti Elevator Components Pvt. Ltd.</a></strong>
+   <strong> <a href="https://techstack.com/">Tech Stack</a></strong>
    All rights reserved.
 
 </footer>

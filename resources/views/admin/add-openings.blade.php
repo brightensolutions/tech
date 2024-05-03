@@ -1,6 +1,6 @@
 @include('layouts.header')
 @php
-    $category_page = '';
+    $opening_page = '';
 @endphp
 @include('layouts.sidebar')
 
@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Add Product</h1>
+                    <h1 class="m-0">Add Job Opening</h1>
                     @if (session()->has('message') && session()->has('result_code'))
                         <div class="alert alert-{{ session('result_code') }}" id="result-alert">
                             {{ session()->get('message') }}
@@ -22,7 +22,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Add Product</a></li>
+                        <li class="breadcrumb-item"><a href="/">Add Job Opening</a></li>
                         {{-- <li class="breadcrumb-item active">images</li> --}}
                     </ol>
                 </div>
@@ -37,9 +37,9 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-6">
-                    <a href="/super-admin/product">Go Back</a>
-                    &nbsp;
-                    <a href="/super-admin/add-product">
+                    <a href="/super-admin/opening">Go Back</a>
+                    &nbsp; <br><br>
+                    <a href="/super-admin/add-opening">
                         <button type="button" class="btn btn-primary">
                             + Add More
                         </button>
@@ -51,48 +51,25 @@
                         <!-- form start -->
                         {{-- slider form 1 --}}
 
-                        <form method="POST" id="product" action="{{ route('addedproduct') }}"
+                        <form method="POST" id="opening" action="{{ route('addedopening') }}"
                             enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="id" value="{{ $data->id ?? '' }}">
                             <!-- Hidden field for journey ID -->
-                            <input type="hidden" name="old_subcategory" value="{{ $data->subcategory ?? '' }}">
+
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="text">Category</label>
-                                    <select class="form-control" name="category" id="categorySelect">
-                                        <option value="">Select Category</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ isset($data) && $data->category == $category->id ? 'selected' : '' }}>
-                                                {{ $category->cat_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
 
                                 <div class="form-group">
-                                    <label for="text">Sub Category</label>
-                                    <select class="form-control" name="subcategory" id="subcategorySelect">
-                                        <option value="">Select Sub Category</option>
-                                        @foreach ($subcategories as $subcategory)
-                                            <option value="{{ $subcategory->id }}"
-                                                {{ isset($data) && $data->subcategory == $subcategory->id ? 'selected' : '' }}
-                                                data-category="{{ $subcategory->category_id }}">
-                                                <!-- Add data attribute for category ID -->
-                                                {{ $subcategory->sub_cat_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <label for="text">Job Title</label>
+                                    <input type="text" class="form-control" name="jobtitle">{{ $data->job_title ?? '' }}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="img">Product</label>
-                                    <img id="imagePreview"
-                                        src="{{ asset('assets/images/product/' . ($data->img ?? '')) }}"
-                                        alt="Product Image" style="width: 30%; height: 30%; display: none;">
-                                    <input type="file" class="form-control" name="image" id="imageInput"
-                                        accept="image/*" multiple>
-                                    <img src="" id="preview" style="display: none;">
+                                    <label for="text">Location</label>
+                                    <input type="text" class="form-control" name="location">{{ $data->location ?? '' }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                        <label for="text">Job Description</label>
+                                        <textarea class="form-control" name="jobdescription" id="summernote">{{ $data->job_description ?? '' }}</textarea>
                                 </div>
 
                                 <div class="card-footer">
@@ -117,28 +94,6 @@
 
 <script>
     $(document).ready(function() {
-
-        $('#imageInput').change(function() {
-            var input = this;
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var img = new Image();
-                    img.onload = function() {
-                        var newWidth = this.width / 5; // Reduce width by 50%
-                        var newHeight = this.height / 5; // Reduce height by 50%
-                        $('#preview').attr('src', e.target.result).css({
-                            width: newWidth + 'px',
-                            height: newHeight + 'px'
-                        }).show();
-                    };
-                    img.src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        });
-
-
 
         $('#categorySelect').change(function() {
             var categoryId = $(this).val(); // Get the selected category ID
@@ -214,13 +169,14 @@
         });
     });
 </script>
-{{-- <script>
+<script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script>
     $(function() {
        // Summernote
-       $('#main-desc').summernote();
-       $('#sec2-desc').summernote();
+       $('#summernote').summernote();
+    //    $('#sec2-desc').summernote();
     })
- </script> --}}
+ </script>
 </body>
 
 </html>
